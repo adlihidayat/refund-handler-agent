@@ -1,0 +1,8 @@
+From: diana@example.com
+Subject: Refund request for order #1080
+
+Hi,
+I bought a Mechanical Keyboard (#1080) delivered about 45 days ago. I decided I don't like the key switches and want a refund.
+Please process my refund of $45.
+
+Diana Prince

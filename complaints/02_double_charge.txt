@@ -1,0 +1,9 @@
+From: bob@example.com
+Subject: Double charge on order #1043
+
+Hi,
+I checked my credit card statement for order #1043 (Smart Watch). I was charged $50 twice ($100 total) for a single item!
+Please refund the extra $50 charge.
+
+Thanks,
+Bob Johnson

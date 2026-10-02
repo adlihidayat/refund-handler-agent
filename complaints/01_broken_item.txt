@@ -1,0 +1,9 @@
+From: alice@example.com
+Subject: Order 1042 arrived broken
+
+Hello,
+My Headphones (order #1042) arrived with a cracked headband and no sound in the right ear.
+I paid $60 for this and would like a full refund.
+
+Thank you,
+Alice Smith

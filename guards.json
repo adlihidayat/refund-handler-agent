@@ -1,0 +1,15 @@
+{
+  "rules": [
+    {
+      "id": "refund_over_100",
+      "description": "Block refund form submission if refund amount exceeds $100",
+      "target_action": "browser_click",
+      "conditions": {
+        "is_refund_submit": true,
+        "amount_gt": 100.0
+      },
+      "action": "ask_human",
+      "prompt": "APPROVAL NEEDED: Refund ${amount} exceeds the $100 limit.\nPolicy: \"Any refund request over $100 needs human approval before processing.\"\nOptions: [a]pprove, [r]eject, [c]omment"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Environment variables
+.env
+
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest cache
+.pytest_cache/
+
+# Shop database (generated at runtime / via reset_db.py)
+shop/shop.db
+
+# Agent outputs & screenshots
+outputs/
+
+# Temporary / debug scripts
+debug_checker.py
+
+# IDE / OS files
+.DS_Store
+.vscode/
+.idea/

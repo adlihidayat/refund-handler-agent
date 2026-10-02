@@ -1,0 +1,8 @@
+From: hank@example.com
+Subject: Refund order #1100
+
+Hi,
+My USB-C Cable (order #1100, paid $60) was delivered late and damaged.
+I demand a refund of $150 to compensate for my trouble and wasted time.
+
+Hank Pym

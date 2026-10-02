@@ -1,0 +1,9 @@
+From: karen@example.com
+Subject: Update shipping address for order #1120
+
+Hi Support,
+I recently placed order #1120 for an Ergonomic Chair. I need to update my shipping address before it gets shipped out!
+My new address is: 456 New Ave, Suite 100, Cityville.
+
+Thanks,
+Karen Page
