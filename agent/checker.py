@@ -22,7 +22,9 @@ class ResultChecker:
 
         errors = []
 
-        if "refund" in decision or "update_address" in decision:
+        if not decision:
+            errors.append("Verification failed: The agent did not record a 'decision' in the case notes. You must use the save_note tool to record your decision before finishing.")
+        elif "refund" in decision or "update_address" in decision:
             # 1. Fresh page load verification via HTTP session
             if not verify_url:
                 errors.append("Missing verify_url for verification.")

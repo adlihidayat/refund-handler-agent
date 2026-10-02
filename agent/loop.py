@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 import json
 import time
 import re
@@ -31,6 +32,9 @@ class AgentLoop:
         self.guards_path = guards_path
         self.base_url = base_url
         self.max_steps = max_steps
+
+        self.neutral_complaint_path = "current_complaint_task.txt"
+        shutil.copy(complaint_path, self.neutral_complaint_path)
         
         case_name = os.path.splitext(os.path.basename(complaint_path))[0]
         self.outputs_dir = os.path.join("outputs", case_name)
@@ -76,7 +80,7 @@ class AgentLoop:
             full_prompt = f"{self.system_prompt}\n\n=== CONVERSATION LOG & CURRENT STATE ===\n{prompt}\n\n=== YOUR NEXT ACTION ===\nReturn ONLY a JSON object with keys 'thought', 'tool', and 'args'."
             
             response = client.models.generate_content(
-                model="gemini-2.8-flash-lite",
+                model="gemini-3.1-flash-lite",
                 contents=full_prompt,
                 config=types.GenerateContentConfig(
                     response_mime_type="application/json"
@@ -105,10 +109,14 @@ class AgentLoop:
         except Exception as e:
             return f"Error executing tool '{tool_name}': {str(e)}"
 
+    def _cleanup(self):
+        if os.path.exists(self.neutral_complaint_path):
+            os.remove(self.neutral_complaint_path)
+
     def run(self):
         console.print(Panel.fit(f"[bold green]Starting Agent Run[/bold green]\nComplaint: [yellow]{self.complaint_path}[/yellow]\nOutputs: [cyan]{self.outputs_dir}[/cyan]"))
         
-        context_msg = f"Task File: {self.complaint_path}\nPolicy File: {self.policy_path}\nShop Base URL: {self.base_url}\n\nInitial Step: Please read the policy file and complaint file using read_file tool to begin."
+        context_msg = f"Task File: {self.neutral_complaint_path}\nPolicy File: {self.policy_path}\nShop Base URL: {self.base_url}\n\nInitial Step: Please read the policy file and complaint file using read_file tool to begin."
         self.history.append({"role": "user", "content": context_msg})
 
         step = 0
@@ -161,13 +169,16 @@ class AgentLoop:
             if tool_name == "finish" and "FINISH_ACCEPTED" in obs:
                 console.print(Panel.fit(f"[bold green]TASK COMPLETED SUCCESSFULLY AT STEP {step}[/bold green]\n{obs}"))
                 self.browser.close()
+                self._cleanup()
                 return True
 
             if self.notes.data.get("status") == "blocked_by_human":
                 console.print(Panel.fit("[bold red]Task stopped by human refusal/comment.[/bold red]"))
                 self.browser.close()
+                self._cleanup()
                 return False
 
         console.print(Panel.fit(f"[bold red]Reached maximum step limit ({self.max_steps}). Task aborted.[/bold red]"))
         self.browser.close()
+        self._cleanup()
         return False

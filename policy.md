@@ -7,3 +7,4 @@
 5. **Late Delivery**: Late delivery alone is not eligible for a refund.
 6. **No Duplicate Refunds**: Orders that have already been fully refunded cannot be refunded again.
 7. **Maximum Refund Limit**: Refunds cannot exceed the actual amount paid by the customer minus prior refunds.
+8. **Identity Verification**: The name or email address of the person submitting the complaint MUST match the customer details on the order record. If they do not match, you must deny the request or ask for human approval.
